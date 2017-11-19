@@ -112,7 +112,7 @@ $(function() {
          });
 
          it('has initial entries', function(done) {
-            const numberOfEntries = $('.feed .entry-link').length;
+            const numberOfEntries = $('.feed .entry').length;
             expect(numberOfEntries).not.toBe(0);
             done();
          });
@@ -124,18 +124,24 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-         beforeEach(function(done) {
-            const el = $('.feed-list a')[0];
+        let HTMLoriginal,
+            HTMLnew;
+
+        beforeEach(function(done) {
+            HTMLoriginal = $('.feed').html();
+
+            const el = $('.feed-list a')[2];
             const id = $(el).data('id');
 
             loadFeed(id, function() {
+                HTMLnew = $('.feed').html();
                 done();
             });
-         });
+        });
 
-         it('changes when feed is selected', function(done) {
-
+        it('changes when feed is selected', function(done) {
+            expect(HTMLnew).not.toBe(HTMLoriginal);
             done();
-         });
+        });
     });
 }());
