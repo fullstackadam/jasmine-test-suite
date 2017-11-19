@@ -92,7 +92,6 @@ $(function() {
             // is menu hidden?            
             expect(hidden).toBe(true);
         });
-
     });
 
     /* TODO: Write a new test suite named "Initial Entries" */
@@ -103,12 +102,19 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-         beforeEach(function() {
+         beforeEach(function(done) {
+            const el = $('.feed-list a')[0];
+            const id = $(el).data('id');
 
+            loadFeed(id, function() {
+                done();
+            });
          });
 
-         it('has initial entries', function() {
-
+         it('has initial entries', function(done) {
+            const numberOfEntries = $('.feed .entry-link').length;
+            expect(numberOfEntries).not.toBe(0);
+            done();
          });
     });
 
@@ -118,5 +124,18 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+         beforeEach(function(done) {
+            const el = $('.feed-list a')[0];
+            const id = $(el).data('id');
+
+            loadFeed(id, function() {
+                done();
+            });
+         });
+
+         it('changes when feed is selected', function(done) {
+
+            done();
+         });
     });
 }());
