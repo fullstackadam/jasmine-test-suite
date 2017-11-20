@@ -27,7 +27,8 @@ $(function() {
     });
 
     it('have names that are defined and not empty', function() {
-      let url;
+      let url,
+          name;
 
       for (let i = 0; i < allFeeds.length; i++) {
         name = allFeeds[i].name;
