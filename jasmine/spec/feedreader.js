@@ -71,9 +71,7 @@ $(function() {
       const el = $('.feed-list a')[0];
       const id = $(el).data('id');
 
-      loadFeed(id, function() {
-        done();
-      });
+      loadFeed(id, done);
     });
 
     it('has initial entries', function(done) {
@@ -90,14 +88,19 @@ $(function() {
 
     // Call loadFeed and wait for request to finish
     beforeEach(function(done) {
-      HTMLoriginal = $('.feed').html();
-
-      const el = $('.feed-list a')[2];
+      const el = $('.feed-list a')[0];
       const id = $(el).data('id');
 
       loadFeed(id, function() {
-        HTMLnew = $('.feed').html();
-        done();
+        HTMLoriginal = $('.feed').html();
+
+        const el2 = $('.feed-list a')[2];
+        const id2 = $(el2).data('id');
+
+        loadFeed(id2, function() {
+          HTMLnew = $('.feed').html();
+          done();
+        });
       });
     });
 
